@@ -11,6 +11,15 @@
     <properties>
         <junit-jupiter-engine.version>5.3.1</junit-jupiter-engine.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lombok.version>1.18.8</lombok.version>
+        <allure-junit5.version>${allure-maven.reportVersion}</allure-junit5.version>
+        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <aspectjweaver.version>1.9.4</aspectjweaver.version>
+        <allure-maven.version>2.10.0</allure-maven.version>
+        <allure-maven.reportVersion>2.12.1</allure-maven.reportVersion>
+        <maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>1.8</maven-compiler-plugin.target>
     </properties>
 
     <dependencies>
@@ -24,10 +33,15 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure-junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -35,10 +49,41 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${maven-compiler-plugin.source}</source>
+                    <target>${maven-compiler-plugin.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <!-- AspectJ is needed to process some annotation like @Attachment etc.-->
+                <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
+                    </argLine>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectjweaver.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <!-- This is optional. It enables mvn goals: allure:serve allure:report -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven.version}</version>
+                <!-- If you don't define report version the plugin will work, but may use the older one.-->
+                <configuration>
+                    <reportVersion>${allure-maven.reportVersion}</reportVersion>
                 </configuration>
             </plugin>
         </plugins>
