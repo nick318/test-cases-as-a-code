@@ -8,7 +8,7 @@ import steps.ClientSteps;
 import steps.OrderAssert;
 import steps.OrderStep;
 
-public class OrdersTest {
+class OrdersTest {
     @Test
     void userCanAddOrderWithExistedUser() {
         //prerequisites
@@ -22,7 +22,8 @@ public class OrdersTest {
                 .chooseOrderCreateDate(Dates.TODAY)
                 .chooseOrderFinishDate(Dates.TODAY)
                 .choosePrice("10000")
-                .chooseStatus(Statuses.PLANNED);
+                .chooseStatus(Statuses.PLANNED)
+                .clickAddOrder();
 
         OrderAssert.orderShouldBeVisibleInTable();
     }

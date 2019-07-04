@@ -2,8 +2,6 @@ package steps;
 
 import io.qameta.allure.Step;
 
-import javax.swing.*;
-
 public class ClientAssert {
     @Step("Новый клиент должен быть отображен в таблице")
     public static void newClientShouldBeVisibleInTable() {
@@ -33,10 +31,7 @@ public class ClientAssert {
      * Отчество -> middleName<p></p>
      * Телефон -> phone<p></p>
      */
-    @Step("Клиент замапился Имя -> firstName<p></p>\n" +
-            "     * Фамилия -> lastName<p></p>\n" +
-            "     * Отчество -> middleName<p></p>\n" +
-            "     * Телефон -> phone<p></p>")
+    @Step("Клиент замапился Имя -> firstName Фамилия -> lastName Отчество -> middleName Телефон -> phone<p></p>")
     public static void clientIsMapped() {
 
     }
