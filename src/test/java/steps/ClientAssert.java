@@ -1,8 +1,11 @@
 package steps;
 
+import io.qameta.allure.Step;
+
 import javax.swing.*;
 
 public class ClientAssert {
+    @Step("Новый клиент должен быть отображен в таблице")
     public static void newClientShouldBeVisibleInTable() {
 
     }
@@ -11,6 +14,7 @@ public class ClientAssert {
         return new ErrorPopup();
     }
 
+    @Step("Должно быть показано сообщение с ошибкой {text}")
     public static ErrorPopup errorPopupWithText(String text) {
         return new ErrorPopup();
     }
@@ -18,6 +22,7 @@ public class ClientAssert {
     /**
      * Измененные поля обновлены и отображаются в таблице.
      */
+    @Step("Измененные поля обновлены и отображаются в таблице.")
     public static void clientShouldHaveUpdatedFields() {
 
     }
@@ -28,10 +33,15 @@ public class ClientAssert {
      * Отчество -> middleName<p></p>
      * Телефон -> phone<p></p>
      */
+    @Step("Клиент замапился Имя -> firstName<p></p>\n" +
+            "     * Фамилия -> lastName<p></p>\n" +
+            "     * Отчество -> middleName<p></p>\n" +
+            "     * Телефон -> phone<p></p>")
     public static void clientIsMapped() {
 
     }
 
+    @Step("Клиент удален")
     public static void clientShouldBeDeleted() {
 
     }

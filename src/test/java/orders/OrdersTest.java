@@ -5,6 +5,7 @@ import com.nick318.domain.Dates;
 import com.nick318.domain.Statuses;
 import org.junit.jupiter.api.Test;
 import steps.ClientSteps;
+import steps.OrderAssert;
 import steps.OrderStep;
 
 public class OrdersTest {
@@ -22,5 +23,7 @@ public class OrdersTest {
                 .chooseOrderFinishDate(Dates.TODAY)
                 .choosePrice("10000")
                 .chooseStatus(Statuses.PLANNED);
+
+        OrderAssert.orderShouldBeVisibleInTable();
     }
 }

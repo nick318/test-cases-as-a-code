@@ -3,13 +3,21 @@ package clients;
 import com.nick318.domain.ClientBase;
 import com.nick318.domain.OrderBase;
 import errors.ErrorsText;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import steps.ClientAssert;
 import steps.ClientSteps;
 import steps.OrderStep;
 
+@Feature("Клиенты")
+@Severity(SeverityLevel.CRITICAL)
 public class ClientTest {
+
     @Test
+    @DisplayName("Пользователь может добавить нового клиента")
     void userCanAddNewClient() {
         ClientSteps.openClientPage()
                 .clickAddClient()
